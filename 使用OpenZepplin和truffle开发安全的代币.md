@@ -94,7 +94,7 @@ truffle compile
 truffle migrate --network development
 ```
 > Compile 将把我们的 Solidity 代码编译成字节码（以太坊虚拟机 (EVM) 能理解的代码），在我们的例子中，Ganache 模拟了 EVM。  
-Migrate（迁移） 会把代码部署到区块链，我们之前在 “truffle-config.js” 文件中设置了 “development” 网络，我们可以在那里找到区块链。
+Migrate（迁移） 会把代码部署到区块链，我们之前在 “truffle.js” 文件中设置了 “development” 网络，我们可以在那里找到区块链。
 
 * 成功执行后，我们可以从cli看到有一行是合约地址：
 > TutorialToken:0x3f68ee2a29feb2072d284867d4d0a7e407b66f94
