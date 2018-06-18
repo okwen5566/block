@@ -1,5 +1,5 @@
-# 区块链思维导图
-## 区块链基础知识
+# README
+## Part1:区块链基础知识
 ### 比特币
 * http://www.baidu.com
 ### 区块链协议
@@ -17,7 +17,7 @@
 * 区块链平台
 * 区块
 * 区块链浏览器
-## 密码学
+## Part2:密码学
 ### 哈希
 ### 非对称加密
 ### 默克尔树Merkle
@@ -26,18 +26,18 @@
 ### 数字签名
 ### 零知识证明
 ### 同态加密
-## 共识算法
+## Part3:共识算法
 ### POW
 ### POS
 ### Paxos
 ### Raft
-## 网络编程/传输协议
+## Part4:网络编程/传输协议
 ### P2P网络
 ### RPC
 ### TCP/IP协议
 ### Socket
 ### WebSocket
-## 以太坊开发
+## Part5:以太坊开发
 ### 以太坊基础知识
 * 架构
 ### 智能合约
@@ -47,14 +47,13 @@
 * Web3.js
 ### 开发案例
 * 发行代币
-    * 空投
-        * [资源](https://github.com/okwen5566/blockchain-study/blob/master/%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BB%A3%E5%B8%81%E8%BF%9B%E8%A1%8CICO(%E4%B8%80).md)
+    * [空投](https://github.com/okwen5566/blockchain-study/blob/master/%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BB%A3%E5%B8%81%E8%BF%9B%E8%A1%8CICO(%E4%B8%80).md)
     * 众筹
 * 投票系统
 ### 以太坊源码学习
-## golang
-## C++
-## 超级账本Hyperledger
+## Part6:golang
+## Part7:C++
+## Part8:超级账本Hyperledger
 ### Docket技术
 ### Fabric
 
