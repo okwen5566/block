@@ -47,9 +47,7 @@ hello
 * Truffle
 * Web3.js
 ### 开发案例
-* 发行代币
-    * [空投](https://github.com/okwen5566/blockchain-study/blob/master/%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BB%A3%E5%B8%81%E8%BF%9B%E8%A1%8CICO(%E4%B8%80).md)
-    * 众筹
+* [发行代币ICO](https://github.com/okwen5566/blockchain-study/tree/master/%E4%BB%A3%E5%B8%81ICO)
 * 投票系统
 ### 以太坊源码学习
 ## Part6:golang
