@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Calpa&apos;s Blog]]></title><description><![CDATA[Front End Technical Blog - Calpa]]></description><link>https://calpa.me/</link><generator>RSS for Node</generator><lastBuildDate>Fri, 10 Aug 2018 03:39:19 GMT</lastBuildDate><item><title><![CDATA[【網易考拉校招】部門總監面對面-直播答疑邀約（附網易內推碼B222E54）]]></title><description><![CDATA[<h2>前言</h2>
+<p>又來到了校招的季節，為了應對這一次的招生活動，公司的 HR 舉辦很多活動，各種福利，然後朋友圈就發了一堆圖。。。不僅如此，他們還會直播答疑。。。依照國際慣例，內推碼 B222E54 先行。以下是直播的細節和內容。</p>
+<h2>直播細節</h2>
+<p>親愛的小考拉：</p>
+<p>相信優秀的你在校招過程中，會有很多非常好的機會，而你當前對考拉的了解，可能還只停留在消費者的階段。我們擔心會因為相互之間的熟悉程度不夠，而最終和你失之交臂，所以特意安排了這次直播，希望能夠通過面對面的形式，加深你對考拉的了解，消除你的疑惑，讓你看到日常工作狀態下真實的考拉。</p>
+<p>直播過程中，你可以提出任何感興趣的問題（技術、生活、美食、校招筆試原題…），我們都會盡力進行解答。我們也會在直播過程中，不定期發放考拉福利！</p>
+<p>具體安排如下：</p>
+<p>直播鏈接：https://m.kaola.com/live/roomDetail.html?roomId=403000</p>
+<p>直播答疑時間：</p>
+<p>8月1日~8月7日</p>
+<p>每天21:00~21:30</p>
+<table>
+<thead>
+<tr><th>時間</th><th>職位大類</th><th>答疑人</th></tr>
+</thead>
+<tbody>
+<tr><td>8月1日  （週三）</td><td>所有技術類職位</td><td>杨文杰 考拉技術類招聘HR</td></tr>
+<tr><td>8月2日（週四）</td><td>BI</td><td>沈老闆 考拉商業智能總監</td></tr>
+<tr><td>8月3日（週五）</td><td>Java</td><td>汉姐  考拉java技術總監</td></tr>
+<tr><td>8月6日（週一）~8月7日（週二）</td><td>前端&amp;移動端&amp;算法&amp;測試</td><td>對應模塊負責人（詳見直播頁）</td></tr>
+</tbody>
+</table>
+<p>如有任何問題，可聯繫 hzhuoxiangyu@corp.netease.com
+期待你的加入！</p>
+<p>附：網易內推碼 <strong>B222E54</strong>，使用方式：</p>
+<ol>
+<li>訪問 https://campus.163.com</li>
+<li>點開你心儀的崗位</li>
+<li>點擊&amp;投遞簡歷按鈕，你將看到崗位所屬部門，選擇“意向部門”—“考拉海購”</li>
+<li>Copy and Paste 內推碼</li>
+<li>填寫簡歷信息，投遞簡歷</li>
+</ol>
+<h2>感想</h2>
+<p>天天都有小夥伴入職，十二點吃飯的時候食堂好多人。。。</p>
+<p>還有就是，還沒到八點，已經開始直播了。。。</p>
+]]></description><link>https://calpa.me/2018/08/01/netease-kaola-live</link><guid isPermaLink="false">https://calpa.me/2018/08/01/netease-kaola-live</guid><pubDate>Wed, 01 Aug 2018 12:00:00 GMT</pubDate></item><item><title><![CDATA[Uncaught ReferenceError: regeneratorRuntime is not defined 解決方法]]></title><description><![CDATA[<h2>前言</h2>
+<p>async/await 能讓開發者享受異步操作的快感，解決回調地獄的問題。然而，編譯器對於 async/await 的編譯有時候卻不和我們想象中的一樣。透過安裝正確插件，或改回 Promise 版本，我們可以解決這個問題。</p>
+<h2>解決方法</h2>
+<p>之前在<a href="https://calpa.me/2018/03/21/gatsybjs-async-await-upgrade-bug-solution/">Gatsbyjs async/await 更新報錯解決方法</a> 就已經提及過，使用 babel-plugin-transform-runtime 就好了。</p>
+<pre><code>npm install --save-dev babel-plugin-transform-runtime
+</code></pre>
+<p>然後在 <code>.babelrc</code> 裡面填寫：</p>
+<pre><code>{
+  &quot;plugins&quot;: [&quot;transform-runtime&quot;]
+}
+</code></pre>
+<p>或加入自定義選項：</p>
+<pre><code>{
+  &quot;plugins&quot;: [
+    [&quot;transform-runtime&quot;, {
+      &quot;helpers&quot;: false,
+      &quot;polyfill&quot;: false,
+      &quot;regenerator&quot;: true,
+      &quot;moduleName&quot;: &quot;babel-runtime&quot;
+    }]
+  ]
+}
+</code></pre>
+<p>因為 Babel 會不斷更新，所以具體配置請到官網查閱，或點擊下面的鏈接。</p>
+<p>其實你也可以使用<code>babel-polyfill</code>，不過它會包含 <code>regenerator runtime</code> 及 <code>core-js</code>，打包的體積會變得很大。</p>
+<h2>參考資料</h2>
+<ol>
+<li><a href="https://babeljs.io/docs/en/babel-plugin-transform-runtime#docsNav">babel-plugin-transform-runtime - Babel</a></li>
+<li><a href="https://babeljs.io/docs/en/babel-polyfill/">babel-polyfill - Babel</a></li>
+</ol>
+]]></description><link>https://calpa.me/2018/07/29/regenerator-runtime-is-not-defined</link><guid isPermaLink="false">https://calpa.me/2018/07/29/regenerator-runtime-is-not-defined</guid><pubDate>Sun, 29 Jul 2018 12:00:00 GMT</pubDate></item><item><title><![CDATA[關於作者]]></title><description><![CDATA[<h2>自我介紹</h2>
+<p>你好，謝謝你閱讀我的博客。就讓我簡單地自我介紹一下自己吧。</p>
+<p>時光荏苒，歲月如梭。不知不覺之間，我就已經來到杭州網易從事前端開發的事業。</p>
+<p>過去，我在香港科技大學就讀化學及環境工程，期間自學前端開發。</p>
+<p>曾經參加八次黑客松，並把心得寫成<a href="https://calpa.me/2017/11/06/hackathon-summary">參加八次黑客馬拉松的個人體會與總結</a>。</p>
+<h2>對於前端的看法</h2>
+<p>畢竟不是科班出身，我只好抽多點時間打好基礎，學習前端技能，跟著在 2017年 5月寫下的 <a href="/2017/05/21/learn-javascript-in-six-steps/">《打好 JavaScript 基礎的6個步驟》</a>路線來做。</p>
+<p>到了三到四年的時候，我希望可以不再是普通的程序員，而是可以和不同的小組談笑風生。</p>
+<p>這就需要我提高自己的能力，認知，格局，以及大局觀。</p>
+<p>提高自己的技能，只是足夠生存；而提高自己的能力，則是開發大規模應用所需要的。</p>
+<h2>關於我的一些事</h2>
+<ol>
+<li>我是一名自學的 Web 前端程序員</li>
+<li>本科內容與編程好像沒有什麼關係。。。</li>
+<li>那個。。。我最喜歡 Miku</li>
+<li>2016年暑假時，我在香港科技大學圖書館工作，從最基本的 HTML，CSS 開始入門。</li>
+<li>原來世界上好多種程序員，比如說Markdown程序員，而我則是想成為一個 Web 前端程序員</li>
+<li>寫博客是為了記錄一下開發日常，還有就是遇到的坑</li>
+<li>推薦一本書：JavaScript高級程序設計(第3版)</li>
+</ol>
+<h2>寫博客的動機</h2>
+<p>最初寫博客，是為了記錄一下開發日常，還有遇到的坑。不知不覺，博客的 Page View 已經超過了 <del>8</del> 30k，用戶數量也到達了 16k 了，這個數字可能還是很小，但這讓我有了去優化博客瀏覽速度的動機 XD</p>
+<h2>回顧</h2>
+<p>2018年6月，正式到杭州工作。</p>
+<p>2017年11月，已取得網易 offer，詳見<a href="https://calpa.me/2017/09/30/hang-zhou-interview-summary/">遠征成功﹣﹣一個香港人北上杭州豬場的前端面試之路》</a>。</p>
+<p>現在是2017年9月，是校招的季節，不知不覺已經過了那麼久的時間。。。</p>
+<p>現在是2017年8月，又是內推的時節，如果你看到這篇自我介紹的話，你可以留下郵箱。這裡是我的<a href="https://calpa.me/resume/resume-calpa-liu-hok-yiu.pdf">簡歷</a>，以及一點小總結。</p>
+<ol>
+<li>就讀港科大</li>
+<li>知識面廣，接觸過 Python, Node, Angular, Web Socket, React, Vue</li>
+<li>自學能力強，7次黑客馬拉松，屢次獲獎</li>
+<li>各社區踴躍參與，並具有一定影響力，現於掘金設有專欄</li>
+<li>英語閲讀無任何障礙，並能流利溝通</li>
+</ol>
+<h2>最近開發什麼項目</h2>
+<ul>
+<li><a href="https://github.com/calpa/blog">blog</a>
+個人博客系統</li>
+</ul>
+]]></description><link>https://calpa.me/2018/05/01/about-calpa-liu</link><guid isPermaLink="false">https://calpa.me/2018/05/01/about-calpa-liu</guid><pubDate>Tue, 01 May 2018 12:00:00 GMT</pubDate></item><item><title><![CDATA[【方法】在直接複製貼上內容的時候，可能已經不知不覺注入了一段不可視的「空白」]]></title><description><![CDATA[<h2>前言</h2>
+<p>趁著深夜有空，我就翻譯了一篇有趣的文章。這篇文章是說如何插入任意文本到任意文本。有時候，文章都會被某些網站會直接引用博客內容。。。這一類的插入空白字符串方法，可以成為其中一個有力的追蹤源頭的線索。</p>
+<p>空白符號不可視，不可說，那就是一個謎一樣的地方了。</p>
+<p>經過實測，瀏覽器直接 Copy &amp; Paste 都會把空白字符帶過去的。</p>
+<p><a href="https://medium.com/@umpox/be-careful-what-you-copy-invisibly-inserting-usernames-into-text-with-zero-width-characters-18b4e6f17b66">Be careful what you copy: Invisibly inserting usernames into text with Zero-Width Characters</a> 這一篇文章提到了加入謎一樣的空白符號的方法。</p>
+<p>簡單來說就是把每一個要加密的文字轉換為不可視符號，然後塞到原本的文本裏面。</p>
+<h2>方法</h2>
+<p>第一步：分割文字，並轉換成二進制格式的符號。</p>
+<pre><code>const zeroPad = num =&gt; ‘00000000’.slice(String(num).length) + num;
+const textToBinary = username =&gt; (
+  username.split('').map(char =&gt;
+    zeroPad(char.charCodeAt(0).toString(2))).join(' ')
+);
+</code></pre>
+<p>第二步：對於每一個二進制符號，並進一步編譯為加密符號</p>
+<pre><code>const binaryToZeroWidth = binary =&gt; (
+  binary.split('').map((binaryNum) =&gt; {
+    const num = parseInt(binaryNum, 10);
+    if (num === 1) {
+      return ''; // 零距離的空白
+    } else if (num === 0) {
+      return '‌'; // 零距離的非連接工具 (NON-JOINER)
+    }
+    return '‍'; // 零距離的連接工具 (JOINER)
+  }).join('') // 零距離的不中斷空白
+);
+</code></pre>
+<p>第三步：加入這個不可視的符號到文字就行。</p>
+<h2>後記</h2>
+<p>Confidential Announcement: ​﻿‌﻿‌﻿​﻿‌﻿‌﻿‌﻿‌﻿​﻿‌﻿‌﻿‌﻿‌﻿​﻿‌﻿‌﻿‍﻿​﻿​﻿‌﻿‌﻿​﻿​﻿‌﻿‌﻿‌﻿​﻿‌﻿​﻿​﻿​﻿​﻿‍﻿​﻿​﻿​﻿​﻿‌﻿​﻿‌﻿‌﻿‌﻿​﻿‌﻿​﻿​﻿​﻿‌﻿‍﻿​﻿​﻿​﻿‌﻿​﻿‌﻿​﻿‌﻿‌﻿​﻿​﻿‌﻿‌﻿‌﻿‌﻿‍﻿​﻿​﻿‌﻿​﻿‌﻿​﻿​﻿​﻿​﻿‌﻿​﻿‌﻿​﻿‌﻿‌﻿‍﻿​﻿‌﻿‌﻿‌﻿​﻿​﻿​﻿​﻿​﻿‌﻿‌﻿‌﻿‌﻿‌﻿​﻿​﻿‍﻿​﻿‌﻿‌﻿​﻿‌﻿‌﻿‌﻿‌﻿‌﻿​﻿​﻿‌﻿​﻿‌﻿‌﻿​﻿‍﻿​﻿‌﻿​﻿‌﻿​﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿​﻿‌﻿‌﻿‌﻿‍﻿​﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿‌﻿​﻿‍﻿​﻿‌﻿​﻿​﻿‌﻿​﻿​﻿‌﻿​﻿‌﻿​﻿‌﻿‌﻿‌﻿‌This is some confidential text that you really shouldn't be sharing anywhere else.</p>
+<p>希望大家玩得開心 www</p>
+<h2>延伸閱讀</h2>
+<ol>
+<li>關於代碼洩密的那些事</li>
+<li><a href="https://umpox.github.io/zero-width-detection/">Zero width Playground</a></li>
+<li><a href="https://medium.com/@umpox/be-careful-what-you-copy-invisibly-inserting-usernames-into-text-with-zero-width-characters-18b4e6f17b66">Be careful what you copy: Invisibly inserting usernames into text with Zero-Width Characters</a></li>
+</ol>
+]]></description><link>https://calpa.me/2018/04/06/insert-zero-width-characters</link><guid isPermaLink="false">https://calpa.me/2018/04/06/insert-zero-width-characters</guid><pubDate>Fri, 06 Apr 2018 15:00:00 GMT</pubDate></item><item><title><![CDATA[知乎無限 live 數據流網站]]></title><description><![CDATA[<h2>前言</h2>
+<p>一直收聽知乎無限 live 的時候，我都會想：如何才能更有效率地收聽這些計畫內的 live 呢？於是我心血來潮，把無限 live 的資料拿了下來，然後做一個數據流的網站。這個網站展示和源碼已經放在 <a href="https://github.com/calpa/zhihu-unlimited-web">Github</a> 。這個項目可能適合那些喜歡看到很多數據的同學...</p>
+<p><img src="https://i.imgur.com/TaTf7dq.jpg" alt="Overview"></p>
+<h2>主要功能</h2>
+<ol>
+<li>展示所有無限 live 計畫下面 live 資料，包括：日期，費用，參加人數，分數，以及講者。</li>
+<li>提供過濾名稱功能</li>
+<li>提供每頁展示特定資料數量的選項（10,20,100）。</li>
+</ol>
+<h2>數據庫</h2>
+<p>透過簡單的 nodejs 腳本來獲取知乎 API，並儲存到 <a href="https://github.com/calpa/zhihu-unlimited-live">zhihu-unlimited-live</a></p>
+]]></description><link>https://calpa.me/2018/03/28/zhihu-unlimited-lives-website</link><guid isPermaLink="false">https://calpa.me/2018/03/28/zhihu-unlimited-lives-website</guid><pubDate>Wed, 28 Mar 2018 12:49:00 GMT</pubDate></item><item><title><![CDATA[Gatsbyjs async/await 更新報錯解決方法]]></title><description><![CDATA[<h2>前言</h2>
+<p>當我在更新 gatsbyjs 本體和 <code>gatsbyjs-*</code> 插件後，就發現構建 JavaScript 代碼的時候失敗。解決問題的過程，需要多聯想關鍵字。但簡單來說，只要安裝正確的 babel 轉換插件，就可以解決這個問題。</p>
+<h2>問題</h2>
+<pre><code>SyntaxError: Unexpected token operator «*», expected punc «(» [component---src-templates-blog-post-js-42473b53655caf4635a2.js:18311,43]
+</code></pre>
+<p>這裡是說在 uglifyjs 處理文本的時候，預期 ( 但出現 <code>*</code> 這一個符號，如果你是有用過 generator 的話，你就會發現這裡的線索跟 generator 有一點相似。</p>
+<h3>generator</h3>
+<pre><code class="language-JavaScript">function* a() {
+  yield 1;
+}
+</code></pre>
+<h3>function</h3>
+<pre><code class="language-JavaScript">function a() {
+  return 1;
+}
+</code></pre>
+<h2>解決方法</h2>
+<p>安裝額外的 babel 插件：</p>
+<p><code>npm i babel-plugin-transform-decorators-legacy babel-plugin-transform-regenerator</code></p>
+<p>安裝之後，babel 就可以把上面 generator 的代碼輸出為以下代碼：</p>
+<pre><code class="language-JavaScript">var _marked = [a].map(regeneratorRuntime.mark);
+
+function a() {
+  return regeneratorRuntime.wrap(function a$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return 1;
+
+        case 2:
+        case &quot;end&quot;:
+          return _context.stop();
+      }
+    }
+  }, _marked[0], this);
+}
+</code></pre>
+<p>轉換後，可以避免 <code>*</code> 這一個符號出現在 ( 之前。</p>
+<p>可能你會遇到這樣的報錯信息，具體錯誤位於 async 的那一行代碼上：</p>
+<pre><code>Uncaught ReferenceError: regeneratorRuntime is not defined
+</code></pre>
+<p>透過 stackoverflow 的回答可以得知，這依然是跟 async/await 相關的問題，使用 babel-plugin-transform-runtime 就好了。</p>
+<pre><code>npm install --save-dev babel-plugin-transform-runtime
+</code></pre>
+<p>別忘記在<code>gatsbyjs-node.js</code> 文件裏面加入修改 babel 設置的<a href="https://github.com/calpa/blog/blob/master/gatsby-node.js#L115">代碼</a>：</p>
+<pre><code class="language-JavaScript">exports.modifyBabelrc = ({ babelrc }) =&gt; ({
+  ...babelrc,
+  plugins: babelrc.plugins.concat(['transform-decorators-legacy', 'transform-regenerator', 'transform-runtime']),
+});
+</code></pre>
+<h2>後記</h2>
+<p>果然我還是要學習一個，看著那兩個符號（<code>*</code>, <code>(</code>），也想不起居然跟 generator 有關。。。</p>
+<h2>參考資料</h2>
+<ol>
+<li><a href="https://github.com/gatsbyjs/gatsby/issues/3931#issuecomment-364414141">gatsby build issues - likely async related</a></li>
+<li><a href="https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy">loganfsmyth/babel-plugin-transform-decorators-legacy</a></li>
+<li><a href="https://babeljs.io/docs/plugins/transform-regenerator/">Regenerator transform - Babel</a></li>
+<li><a href="http://babeljs.io/docs/plugins/transform-runtime/">Runtime transform</a></li>
+<li><a href="https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined">Babel 6 regeneratorRuntime is not defined</a></li>
+</ol>
+]]></description><link>https://calpa.me/2018/03/21/gatsybjs-async-await-upgrade-bug-solution</link><guid isPermaLink="false">https://calpa.me/2018/03/21/gatsybjs-async-await-upgrade-bug-solution</guid><pubDate>Wed, 21 Mar 2018 12:00:00 GMT</pubDate></item><item><title><![CDATA[Gitalk Error: Validation Failed. 442 報錯解決方法]]></title><description><![CDATA[<h2>前言</h2>
+<p>最近忙著大學的事情，少了時間寫博客文章。可是沒想到在過去那一篇文章發佈之後，就遇到 Gitalk 評論區出現 <code>Error: Validation Failed.</code> 這樣的問題，在 Github 上面和網友討論之後，想出了一個解決方法，希望可以拋磚引玉。</p>
+<h2>問題</h2>
+<p><img src="https://i.imgur.com/G3fhUVV.jpg" alt=""></p>
+<p>Github 更新了關於 Issue 字數的限制，利用 location.pathname 的話創建 Issue 的 Tag 的話，很容易超過 50 字。</p>
+<h2>方法</h2>
+<p>這是原本的配置，也是 Github Repo 上面的入門方法。</p>
+<pre><code>const gitalk = new Gitalk({
+  clientID: 'Github Application Client ID',
+  clientSecret: 'Github Application Client Secret',
+  repo: 'Github repo',
+  owner: 'Github repo owner',
+  admin: ['Github repo owner and collaborators, only these guys can initialize github issues'],
+  id: location.pathname,      // Ensure uniqueness and length less than 50
+  distractionFreeMode: false  // Facebook-like distraction free mode
+});
+</code></pre>
+<h3>解決思路</h3>
+<p>如果直接修改 id 的賦值的話，那麼當 Gitalk 尋找以前的標籤的時候，便會出現找不到 Issue，自動創建一個新討論區的問題。。。</p>
+<p>這很明顯不是我們需要的設計，我們是想要繼續運用那一個 Issue。</p>
+<p>於是我便想了一下最近的 Issue 和以前的 Issue 的區別，其中一個就是時間的分別。</p>
+<p>因為我遇到這個問題是 2018年 3月，所以用這個時間分開 id 的賦值就好了，比如把標題 (title) 設置成 id：</p>
+<pre><code>const issueDate = '2018-03-01';
+
+if (moment(createdDate).isAfter(issueDate)) {
+  id = title;
+}
+</code></pre>
+<p>這樣的話，其實就可以了。但如果文章的標題很長的話，那又會超出 50字的限制。。。那麼用 md5 把字數縮短一下就好了。它既帶有唯一的特性，也可以限制字數。</p>
+<p>首先安裝 md5 工具: <code>npm install md5</code>
+然後在你寫入 Gitalk 評論區的地方寫入以下代碼：</p>
+<pre><code>import md5 from 'md5';
+
+id = md5(title);
+</code></pre>
+<p>如果你是使用 React 或者想要觀看代碼更改的話，那麼你可以查看我的 Commit Log： https://github.com/calpa/blog/commit/88c83f66b070655e645581783097f019e6539c0e#diff-b334c7299860c69226f3d8a8f4a36c1f</p>
+<p>如果你覺得實用的話，不妨 Star 一下以獲得之後的最新更新。</p>
+<h2>相關鏈接</h2>
+<ol>
+<li><a href="https://www.npmjs.com/package/md5">md5</a></li>
+<li><a href="https://github.com/gitalk/gitalk">gitalk/gitalk</a></li>
+</ol>
+]]></description><link>https://calpa.me/2018/03/10/gitalk-error-validation-failed-442-solution</link><guid isPermaLink="false">https://calpa.me/2018/03/10/gitalk-error-validation-failed-442-solution</guid><pubDate>Sat, 10 Mar 2018 13:00:00 GMT</pubDate></item><item><title><![CDATA[美化 console.log 輸出]]></title><description><![CDATA[<h2>前言</h2>
+<p>console.log() 這一個方法可以說是前端工程師最常用的調試方法之一。當我在研究音樂播放器 Aplayer 源碼的時候，發現其中有一行有趣的代碼，可以在 console 裏面輸出自帶顏色的圖案，故在此記錄一下。</p>
+<h2>方法</h2>
+<p>簡單來說就是插入 <code>%c</code> 這一個替換符，之後的句子便會加上相對應的樣式。</p>
+<pre><code class="language-javascript">console.log(`${'\n'} %c CALPA %c https://calpa.me ${'\n'}${'\n'}`, 'color: #6cf; background: #030307; padding:5px 0;', 'background: #6cf; padding:5px 0;');
+</code></pre>
+<p>然後你打開 console 便會看到這個結果：
+<img src="https://i.imgur.com/VoxnwAJ.jpg" alt="Colorful Logger"></p>
+<p>另外一個例子：</p>
+<pre><code class="language-javascript">console.log(&quot;This is %cMy stylish message&quot;, &quot;color: yellow; font-style: italic; background-color: blue;padding: 2px&quot;);
+</code></pre>
+<p><img src="https://i.imgur.com/cAOYrrn.jpg" alt="Imgur"></p>
+<h2>備註</h2>
+<p>以上代碼已注入到博客系統中，有興趣查閱代碼的同學可以查看<a href="https://github.com/calpa/blog/blob/master/gatsby-browser.js">源碼部分</a>。</p>
+<h2>參考資料</h2>
+<ol>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/console">Console - MDN</a></li>
+<li><a href="https://github.com/MoePlayer/APlayer/blob/master/src/js/index.js">MoePlayer / APlayer</a></li>
+</ol>
+]]></description><link>https://calpa.me/2018/03/04/console-log-colorful-output</link><guid isPermaLink="false">https://calpa.me/2018/03/04/console-log-colorful-output</guid><pubDate>Sun, 04 Mar 2018 12:00:00 GMT</pubDate></item><item><title><![CDATA[博客域名續期]]></title><description><![CDATA[<h2>前言</h2>
+<p>在域名過期之前的大約一個月，Namecheap 這一家域名公司就已經提醒我要續期了。現在我的域名是使用 Namecheap 這一家公司，無論是收費還是服務，都是不錯的。如無意外的話，我應該會繼續用這一家公司，避免搬運域名的麻煩工序。</p>
+<h2>步驟</h2>
+<p>域名續期其實蠻簡單的：進入電子郵件裡面的鏈接，點擊 Renew 的按鈕，輸入信用卡的資料就可以了。</p>
+<p><img src="https://i.imgur.com/tOcrvye.png" alt="Imgur"></p>
+<p><img src="https://i.imgur.com/5mrCraQ.png" alt="Imgur"></p>
+<h2>查詢域名資料</h2>
+<p>如果你用 Domain Name Lookup 服務的話，例如<a href="http://cqcounter.com/whois/?query=calpa.me">CQ Counter</a> 提供的免費 Whois查詢，就可以知道那個域名的資料。</p>
+<p>這裡簡單說一下：
+Creation Date: 2017-02-22T14:53:23Z
+Registry Expiry Date: 2019-02-22T14:53:23Z</p>
+<p>Creation Date 是域名創建日期，這裡是說本博客在 2017年2月22日的時候正式有了自己的域名。</p>
+<p>Registry Expiry Date 是域名過期日期，這裡是說本博客將於 2019年2月22日過期，也就是說已經 +1 year了。</p>
+<h2>備註</h2>
+<p>最近有點熬夜，身體不太舒服。。。看來還是要養成早睡早起的習慣才行 TAT</p>
+]]></description><link>https://calpa.me/2018/02/13/using-namecheap-renew-domain-name-2018</link><guid isPermaLink="false">https://calpa.me/2018/02/13/using-namecheap-renew-domain-name-2018</guid><pubDate>Tue, 13 Feb 2018 12:00:00 GMT</pubDate></item><item><title><![CDATA[又到了年度總結的季節 ﹣ 我的 2017 前端開發回顧]]></title><description><![CDATA[<h2>前言</h2>
+<p>從最初的失望與後悔，到最後的興奮與感動，2017年可以算是充滿挑戰與機遇的一年。雖然我依然是一個非科班學生，但是這沒有阻止我轉行成為前端工程師，反而成為向前邁進的動力之一。如果沒有這些經歷，我也不會發現自己對於編程的那份熱愛。。。在此，就讓我回顧一下這一年在自學編程轉行的經歷吧。在開始這篇文章之前，我先戴上頭盔，以防意外。</p>
+<h2>學習 JavaScript</h2>
+<p>JavaScript 可以說是前端工程師必須學習的語言之一。</p>
+<p>一開始的時候，我是跟著知乎上面的一些學習方法，並整理為 <a href="/2017/05/21/learn-javascript-in-six-steps/">打好 JavaScript 基礎的6個步驟</a>。我抱著好奇心的心態在 Facebook 的台灣前端社區裡面發文，沒想到的是，這篇文章吸引了很多讀者，讓我堅定了自己學習的路線。</p>
+<h2>我的博客</h2>
+<p><img src="https://i.imgur.com/cmJLkkV.png" alt="Imgur"></p>
+<p>這個博客是 2017年 1月 時創建的。當時是 Hexo + Github Pages 的靜態構建博客系統來完成，它的概念是很不錯的，把網站的主題和文章分開，要修改主題的時候就直接修改源代碼就行，不會影響到文章。但是還是有一個問題，就是文章需要放置在當前目錄裡面，也就是說沒有做到異地修改文章的功能。</p>
+<p><img src="https://i.imgur.com/AKVHvQy.png" alt="最初的樣子"></p>
+<p>網上有一些配置，比如說 Hexo-Admin，我也是有修改一番，但是改著改著，越來越多功能想要添加。</p>
+<p>因此我就開始查找其他的解決方法，最初我是沒有用 GatsbyJS 的，因為它使用的 GraphQL 蠻難去學習的。。。</p>
+<p>過了一陣子，<a href="Reactjs.org">React 官網</a> 使用 GatsbyJS，讓我也很好奇到底為什麼會使用它。</p>
+<p>博客初版</p>
+<p><img src="https://i.imgur.com/gGLl6P4.png" alt="Imgur"></p>
+<p>相關文章：</p>
+<ol>
+<li><a href="https://calpa.me/2017/05/30/why-i-write-blog-post/">為什麼要寫技術博客？</a></li>
+<li><a href="/2017/09/30/hang-zhou-interview-summary/">【圖多】《遠征成功﹣﹣一個香港人北上杭州豬場的前端面試之路》</a></li>
+<li><a href="/2017/06/14/hong-kong-open-sources-conference-remarks/">2017 年香港開源年會後記</a></li>
+</ol>
+<h2>前端框架</h2>
+<p>不管黑貓白貓，能抓到老鼠的就是好貓。這裡就先簡單說說我對他們的感覺吧。</p>
+<p>一開始學習前端開發的時候，我是利用 Angular 去開發小型項目的。在那個戰火紛飛的時代（雖然現在也是），Angular 給我一種大教堂的感覺，可以在裡面找到我所需要的東西，不需要自己去配置那麼多。可能是當時對於 node.js 和 npm 不太了解，所以經常會遇到各種<code>package 找不到的問題</code>。</p>
+<p>在利用 React 開發網站的時候，感覺 React 很簡單，純潔，給我一種菜市場的感覺。我可以根據需求，去市場自己挑貨。如果看過那些工具上的源代碼，都不喜歡的話，自己寫一個也是可以的。當我在挑貨的時候，便會需要考慮到各方面的因素，比如說是否繼續有人維護，Github 上面的 Stars 數目，npm 每個月下載量等等。</p>
+<p>暑假的時候，我到了深圳實習，寫 Vue.js。它確實一個不錯的框架，對於初學者也是非常的友善。</p>
+<p>在使用過這些框架之後，我覺得其實框架只是一個輔助的工具，好好地寫代碼才是重點。對於那些選擇困難癥的患者，更加是應該碼上起行。</p>
+<h3>前端工具</h3>
+<p>在開發網站的過程中，也是對於一些前端的常見工具有了一點的了解。比如說 Webpack, Babel, ESLint。這些也算是標配吧。</p>
+<p>相關文章：</p>
+<ul>
+<li><a href="https://calpa.me/2017/06/19/front-end-performance-check-list/">前端性能優化必備工具清單</a></li>
+</ul>
+<h3>UI</h3>
+<p>一開始的話，我是用 Bootstrap 3 來構建一個很普通的網站。詳見 HackJam，當時是直接寫進去 HTML的。也沒有用什麼框架幫忙。</p>
+<p><img src="https://i.imgur.com/38Lsoxs.png" alt="HackJam 2016"></p>
+<p>現在開發的時候，如果可以配置 SCSS 預處理器，我會盡量以 SCSS 代替純 CSS 來寫樣式，因為它可以簡單處理 CSS 比重問題，以及提高代碼複用性。</p>
+<h2>黑客松</h2>
+<p>我曾經參加八次黑客松，並在微軟舉辦的 ImagineHack 中取得第二名，最受歡迎獎，並在 TechCrunch 2017 黑客松深圳站取得第三名。</p>
+<p>作為一個科大學生，參加科大舉辦的比賽也是很正常的吧，賽後寫了 <a href="/2017/04/23/hackUST-2017-hackathon-summary/">HackUST 2017 回顧</a>。</p>
+<p>ImagineHack 比賽時，我是沒有期待自己會獲勝的，畢竟自己初出茅廬，而且那個時候掌握的技能非常有限。這次比賽讓我發現原來參加黑客松是那麼的有趣。</p>
+<p>而 TechCrunch 黑客松，則是讓我開啟了前往中國之路。也是之後我到深圳南山工作的伏筆吧。</p>
+<p>相關文章：
+<a href="/2017/11/06/hackathon-summary/">參加八次黑客馬拉松的個人體會與總結</a></p>
+<h3>印象最深刻的事</h3>
+<ol>
+<li>兼容不同的瀏覽器，例如 IE。</li>
+</ol>
+<p>一些非常好用的屬性是不能用的，因為舊版本的 IE 沒有支持這些屬性。</p>
+<p><a href="https://caniuse.com/#search=box-shadow">box-shadow</a>: IE 9</p>
+<p><a href="https://caniuse.com/#search=flex">flex</a>: IE 10, 11 (Partially Supported)</p>
+<p>更多的兼容性要求可以在 <a href="https://caniuse.com/">Can I use ? 網站</a> 裡面查詢。</p>
+<ol start="2">
+<li>為什麼 Caps Lock 和 Control 互換了？</li>
+</ol>
+<p><img src="https://i.imgur.com/9lIiA7A.png" alt="Imgur"></p>
+<h3>學習時遇到的趣事</h3>
+<p>The Nature of Code 教如何利用 p5.js 模擬一些大自然的生命變化。這個時候，我發現原來用 Mac 寫代碼是可以那麼有趣的。</p>
+<p>互聯網上有非常多的教學，免費教人學習編程。例如 MIT, Harvard，它們將課程的影片, 素材以及功課上傳，並且可以互相交流。</p>
+<h2>展望 2018年</h2>
+<ol>
+<li>用心把 SICP 看完，做完。</li>
+<li>繼續學習 (CI/CD)</li>
+<li>Node.js</li>
+<li>做一個全棧的項目</li>
+<li>研究研究白色相簿2</li>
+</ol>
+<h2>延伸文章 (2018年)</h2>
+<ul>
+<li>前端框架</li>
+<li>前端工具</li>
+<li>在線學習課堂</li>
+<li><a href="https://codepen.io/calpa/pen/WdjgzM">White Album Font Generator</a></li>
+</ul>
+<h2>參考資料</h2>
+<ul>
+<li><a href="http://gs.statcounter.com/">StatCounter Global Stats</a></li>
+</ul>
+]]></description><link>https://calpa.me/2017/12/31/personal-review-2017</link><guid isPermaLink="false">https://calpa.me/2017/12/31/personal-review-2017</guid><pubDate>Sun, 31 Dec 2017 12:00:00 GMT</pubDate></item></channel></rss>
